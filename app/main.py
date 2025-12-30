@@ -1,14 +1,14 @@
 class Animal:
     # this is my test
-    alive = set()
+    alive = []
     def __init__(self, name: str) -> None:
         self.name = name
         self.health = 100
         self.hidden = False
-        Animal.alive.add(self)
+        Animal.alive.append(self)
     
     def __repr__(self):
-        return (f"name: {self.name}, health: {self.health}, hidden: {self.hidden}")
+        return (f"Name: {self.name}, Health: {self.health}, Hidden: {self.hidden}")
 
 class Herbivore(Animal):
     def __init__(self, name: str) -> None:
@@ -17,15 +17,13 @@ class Herbivore(Animal):
     def hide(self):
         self.hidden = True
 
-        self.hidden = not self.hidden
-
 
 class Carnivore(Animal):
     def __init__(self, name: str) -> None:
         super().__init__(name)
     
     def bite(self, animal: Animal) -> None:
-        if animal in Animal.alive and not animal.hidden:
+        if animal in Animal.alive and not animal.hidden and animal.Herbivore:
             animal.health -= 50
             if animal.health <= 0:
                 Animal.alive.remove(animal)
